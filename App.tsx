@@ -5,6 +5,7 @@ import { Main } from './pages/Main';
 import { Login } from './pages/Login';
 import { auth } from './config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { signOut } from 'firebase/auth';
 
 export default function App() {
   const [user] = useAuthState(auth);
@@ -14,8 +15,13 @@ export default function App() {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
-          <p>{auth.currentUser?.displayName}</p>
-          <img src={auth.currentUser?.photoURL || 'NO_IMAGE'} />
+          {user && (
+            <>
+              <p>{auth.currentUser?.displayName}</p>
+              <img src={auth.currentUser?.photoURL || 'NO_IMAGE'} />
+              <button onClick={async () => await signOut(auth)}>Logout</button>
+            </>
+          )}
         </nav>
         <Routes>
           <Route path="/" element={<Main />} />
