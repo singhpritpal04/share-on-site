@@ -3,6 +3,7 @@ import './style.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Main } from './pages/Main';
 import { Login } from './pages/Login';
+import { Post } from './pages/Post/Post';
 import { auth } from './config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { signOut } from 'firebase/auth';
@@ -13,12 +14,25 @@ export default function App() {
     <div>
       <Router>
         <nav>
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
+          <Link className="nav_link" to="/">
+            Home
+          </Link>
+          {!user ? (
+            <Link className="nav_link" to="/login">
+              Login
+            </Link>
+          ) : (
+            <Link className="nav_link" to="/createpost">
+              Create Post
+            </Link>
+          )}
           {user && (
             <>
+              <img
+                className="profile_pic"
+                src={auth.currentUser?.photoURL || 'NO_IMAGE'}
+              />
               <p>{auth.currentUser?.displayName}</p>
-              <img src={auth.currentUser?.photoURL || 'NO_IMAGE'} />
               <button onClick={async () => await signOut(auth)}>Logout</button>
             </>
           )}
@@ -26,6 +40,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/createpost" element={<Post />} />
         </Routes>
       </Router>
     </div>

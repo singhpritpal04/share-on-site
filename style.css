@@ -1,4 +1,26 @@
+body {
+  padding: 0;
+  margin: 0;
+}
 h1,
 p {
   font-family: Lato;
+}
+
+nav {
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.nav_link {
+  font-size: 24px;
+  margin: 0 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.profile_pic {
+  width: 100%;
+  max-width: 50px;
 }
