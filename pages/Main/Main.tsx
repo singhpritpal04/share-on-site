@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { Postsl } from './Postsl';
 import { getDocs, collection } from 'firebase/firestore';
 import { db } from '../../config/firebase';
-interface Posts {
+export interface Posts {
   id: string;
   userId: string;
   title: string;
@@ -21,5 +22,11 @@ export const Main = () => {
   React.useEffect(() => {
     getPost();
   }, []);
-  return <div>This is MAin Page</div>;
+  return (
+    <div>
+      {postsList?.map((post) => (
+        <Postsl post={post} />
+      ))}
+    </div>
+  );
 };
