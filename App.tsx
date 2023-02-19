@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './style.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Main } from './pages/Main';
+import { Main } from './pages/Main/Main';
 import { Login } from './pages/Login';
 import { Post } from './pages/Post/Post';
 import { auth } from './config/firebase';
